@@ -1,0 +1,18 @@
+DECLARE 
+V_STUDENT_ID NUMBER:= &SV_STUDENT_ID;
+v_first_name varchar2(20);
+v_last_name varchar2(25);
+
+BEGIN
+ SELECT first_name,last_name
+ INTO v_first_name,v_last_name
+ FROM employees
+ WHERE EMPLOYEE_ID= V_STUDENT_ID;
+
+ DBMS_OUTPUT.PUT_LINE ('STudent Name:'||v_first_name || ' ' ||v_last_name);
+ 
+EXCEPTION
+ WHEN NO_DATA_FOUND THEN
+    DBMS_OUTPUT.PUT_LINE ('NO STUDENT');
+END;
+/

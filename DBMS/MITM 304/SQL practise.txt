@@ -1,0 +1,493 @@
+
+SQL*Plus: Release 11.2.0.2.0 Production on Sun Jan 14 10:52:56 2018
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> connect system
+Enter password:
+Connected.
+SQL> alter user hr identified by mii account unlock;
+
+User altered.
+
+SQL> connect hr
+Enter password:
+Connected.
+SQL> select table_name from user_table;
+select table_name from user_table
+                       *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> describe employees;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+
+ EMPLOYEE_ID                               NOT NULL NUMBER(6)
+ FIRST_NAME                                         VARCHAR2(20)
+ LAST_NAME                                 NOT NULL VARCHAR2(25)
+ EMAIL                                     NOT NULL VARCHAR2(25)
+ PHONE_NUMBER                                       VARCHAR2(20)
+ HIRE_DATE                                 NOT NULL DATE
+ JOB_ID                                    NOT NULL VARCHAR2(10)
+ SALARY                                             NUMBER(8,2)
+ COMMISSION_PCT                                     NUMBER(2,2)
+ MANAGER_ID                                         NUMBER(6)
+ DEPARTMENT_ID                                      NUMBER(4)
+
+SQL> select table_name from user_tables;
+
+TABLE_NAME
+------------------------------
+REGIONS
+LOCATIONS
+DEPARTMENTS
+JOBS
+EMPLOYEES
+JOB_HISTORY
+COUNTRIES
+
+7 rows selected.
+
+
+107 rows selected.
+
+SQL> select last_name as name,coalesce(commission_pct*12,0)as yearly_ commission from employees;
+select last_name as name,coalesce(commission_pct*12,0)as yearly_ commission from employees
+                                                                 *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select last_name as name,coalesce(commission_pct,0)*12 as yearly_ commission from employees;
+select last_name as name,coalesce(commission_pct,0)*12 as yearly_ commission from employees
+                                                                  *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select last_name as name,coalesce(commission_pct,0)*12 as yearly_commission from employees;
+
+NAME                      YEARLY_COMMISSION
+------------------------- -----------------
+King                                      0
+Kochhar                                   0
+De Haan                                   0
+Hunold                                    0
+Ernst                                     0
+Austin                                    0
+Pataballa                                 0
+Lorentz                                   0
+Greenberg                                 0
+Faviet                                    0
+Chen                                      0
+
+NAME                      YEARLY_COMMISSION
+------------------------- -----------------
+Sciarra                                   0
+Urman                                     0
+Popp                                      0
+Raphaely                                  0
+Khoo                                      0
+Baida                                     0
+Tobias                                    0
+Himuro                                    0
+Colmenares                                0
+Weiss                                     0
+Fripp                                     0
+
+NAME                      YEARLY_COMMISSION
+------------------------- -----------------
+Kaufling                                  0
+Vollman                                   0
+Mourgos                                   0
+Nayer                                     0
+Mikkilineni                               0
+Landry                                    0
+Markle                                    0
+Bissot                                    0
+Atkinson                                  0
+Marlow                                    0
+Olson                                     0
+
+NAME                      YEARLY_COMMISSION
+------------------------- -----------------
+Mallin                                    0
+Rogers                                    0
+Gee                                       0
+Philtanker                                0
+Ladwig                                    0
+Stiles                                    0
+Seo                                       0
+Patel                                     0
+Rajs                                      0
+Davies                                    0
+Matos                                     0
+
+NAME                      YEARLY_COMMISSION
+------------------------- -----------------
+Vargas                                    0
+Russell                                 4.8
+Partners                                3.6
+Errazuriz                               3.6
+Cambrault                               3.6
+Zlotkey                                 2.4
+Tucker                                  3.6
+Bernstein                                 3
+Hall                                      3
+Olsen                                   2.4
+Cambrault                               2.4
+
+NAME                      YEARLY_COMMISSION
+------------------------- -----------------
+Tuvault                                 1.8
+King                                    4.2
+Sully                                   4.2
+McEwen                                  4.2
+Smith                                   3.6
+Doran                                   3.6
+Sewall                                    3
+Vishney                                   3
+Greene                                  1.8
+Marvins                                 1.2
+Lee                                     1.2
+
+NAME                      YEARLY_COMMISSION
+------------------------- -----------------
+Ande                                    1.2
+Banda                                   1.2
+Ozer                                      3
+Bloom                                   2.4
+Fox                                     2.4
+Smith                                   1.8
+Bates                                   1.8
+Kumar                                   1.2
+Abel                                    3.6
+Hutton                                    3
+Taylor                                  2.4
+
+NAME                      YEARLY_COMMISSION
+------------------------- -----------------
+Livingston                              2.4
+Grant                                   1.8
+Johnson                                 1.2
+Taylor                                    0
+Fleaur                                    0
+Sullivan                                  0
+Geoni                                     0
+Sarchand                                  0
+Bull                                      0
+Dellinger                                 0
+Cabrio                                    0
+
+NAME                      YEARLY_COMMISSION
+------------------------- -----------------
+Chung                                     0
+Dilly                                     0
+Gates                                     0
+Perkins                                   0
+Bell                                      0
+Everett                                   0
+McCain                                    0
+Jones                                     0
+Walsh                                     0
+Feeney                                    0
+OConnell                                  0
+
+NAME                      YEARLY_COMMISSION
+------------------------- -----------------
+Grant                                     0
+Whalen                                    0
+Hartstein                                 0
+Fay                                       0
+Mavris                                    0
+Baer                                      0
+Higgins                                   0
+Gietz                                     0
+
+107 rows selected.
+
+SQL> select last_name as name,coalesce(commission_pct,0)*12 yearly_commission from employees;
+
+NAME                      YEARLY_COMMISSION
+------------------------- -----------------
+King                                      0
+Kochhar                                   0
+De Haan                                   0
+Hunold                                    0
+Ernst                                     0
+Austin                                    0
+Pataballa                                 0
+Lorentz                                   0
+Greenberg                                 0
+Faviet                                    0
+Chen                                      0
+
+NAME                      YEARLY_COMMISSION
+------------------------- -----------------
+Sciarra                                   0
+Urman                                     0
+Popp                                      0
+Raphaely                                  0
+Khoo                                      0
+Baida                                     0
+Tobias                                    0
+Himuro                                    0
+Colmenares                                0
+Weiss                                     0
+Fripp                                     0
+
+NAME                      YEARLY_COMMISSION
+------------------------- -----------------
+Kaufling                                  0
+Vollman                                   0
+Mourgos                                   0
+Nayer                                     0
+Mikkilineni                               0
+Landry                                    0
+Markle                                    0
+Bissot                                    0
+Atkinson                                  0
+Marlow                                    0
+Olson                                     0
+
+NAME                      YEARLY_COMMISSION
+------------------------- -----------------
+Mallin                                    0
+Rogers                                    0
+Gee                                       0
+Philtanker                                0
+Ladwig                                    0
+Stiles                                    0
+Seo                                       0
+Patel                                     0
+Rajs                                      0
+Davies                                    0
+Matos                                     0
+
+NAME                      YEARLY_COMMISSION
+------------------------- -----------------
+Vargas                                    0
+Russell                                 4.8
+Partners                                3.6
+Errazuriz                               3.6
+Cambrault                               3.6
+Zlotkey                                 2.4
+Tucker                                  3.6
+Bernstein                                 3
+Hall                                      3
+Olsen                                   2.4
+Cambrault                               2.4
+
+NAME                      YEARLY_COMMISSION
+------------------------- -----------------
+Tuvault                                 1.8
+King                                    4.2
+Sully                                   4.2
+McEwen                                  4.2
+Smith                                   3.6
+Doran                                   3.6
+Sewall                                    3
+Vishney                                   3
+Greene                                  1.8
+Marvins                                 1.2
+Lee                                     1.2
+
+NAME                      YEARLY_COMMISSION
+------------------------- -----------------
+Ande                                    1.2
+Banda                                   1.2
+Ozer                                      3
+Bloom                                   2.4
+Fox                                     2.4
+Smith                                   1.8
+Bates                                   1.8
+Kumar                                   1.2
+Abel                                    3.6
+Hutton                                    3
+Taylor                                  2.4
+
+NAME                      YEARLY_COMMISSION
+------------------------- -----------------
+Livingston                              2.4
+Grant                                   1.8
+Johnson                                 1.2
+Taylor                                    0
+Fleaur                                    0
+Sullivan                                  0
+Geoni                                     0
+Sarchand                                  0
+Bull                                      0
+Dellinger                                 0
+Cabrio                                    0
+
+NAME                      YEARLY_COMMISSION
+------------------------- -----------------
+Chung                                     0
+Dilly                                     0
+Gates                                     0
+Perkins                                   0
+Bell                                      0
+Everett                                   0
+McCain                                    0
+Jones                                     0
+Walsh                                     0
+Feeney                                    0
+OConnell                                  0
+
+NAME                      YEARLY_COMMISSION
+------------------------- -----------------
+Grant                                     0
+Whalen                                    0
+Hartstein                                 0
+Fay                                       0
+Mavris                                    0
+Baer                                      0
+Higgins                                   0
+Gietz                                     0
+
+107 rows selected.
+
+SQL> select first_name||q'[ belongs to the manager with id: ]'|| manager_id as "Employe and Manager" from employees;
+
+Employe and Manager
+--------------------------------------------------------------------------------
+Steven belongs to the manager with id:
+Neena belongs to the manager with id: 100
+Lex belongs to the manager with id: 100
+Alexander belongs to the manager with id: 102
+Bruce belongs to the manager with id: 103
+David belongs to the manager with id: 103
+Valli belongs to the manager with id: 103
+Diana belongs to the manager with id: 103
+Nancy belongs to the manager with id: 101
+Daniel belongs to the manager with id: 108
+John belongs to the manager with id: 108
+
+Employe and Manager
+--------------------------------------------------------------------------------
+Ismael belongs to the manager with id: 108
+Jose Manuel belongs to the manager with id: 108
+Luis belongs to the manager with id: 108
+Den belongs to the manager with id: 100
+Alexander belongs to the manager with id: 114
+Shelli belongs to the manager with id: 114
+Sigal belongs to the manager with id: 114
+Guy belongs to the manager with id: 114
+Karen belongs to the manager with id: 114
+Matthew belongs to the manager with id: 100
+Adam belongs to the manager with id: 100
+
+Employe and Manager
+--------------------------------------------------------------------------------
+Payam belongs to the manager with id: 100
+Shanta belongs to the manager with id: 100
+Kevin belongs to the manager with id: 100
+Julia belongs to the manager with id: 120
+Irene belongs to the manager with id: 120
+James belongs to the manager with id: 120
+Steven belongs to the manager with id: 120
+Laura belongs to the manager with id: 121
+Mozhe belongs to the manager with id: 121
+James belongs to the manager with id: 121
+TJ belongs to the manager with id: 121
+
+Employe and Manager
+--------------------------------------------------------------------------------
+Jason belongs to the manager with id: 122
+Michael belongs to the manager with id: 122
+Ki belongs to the manager with id: 122
+Hazel belongs to the manager with id: 122
+Renske belongs to the manager with id: 123
+Stephen belongs to the manager with id: 123
+John belongs to the manager with id: 123
+Joshua belongs to the manager with id: 123
+Trenna belongs to the manager with id: 124
+Curtis belongs to the manager with id: 124
+Randall belongs to the manager with id: 124
+
+Employe and Manager
+--------------------------------------------------------------------------------
+Peter belongs to the manager with id: 124
+John belongs to the manager with id: 100
+Karen belongs to the manager with id: 100
+Alberto belongs to the manager with id: 100
+Gerald belongs to the manager with id: 100
+Eleni belongs to the manager with id: 100
+Peter belongs to the manager with id: 145
+David belongs to the manager with id: 145
+Peter belongs to the manager with id: 145
+Christopher belongs to the manager with id: 145
+Nanette belongs to the manager with id: 145
+
+Employe and Manager
+--------------------------------------------------------------------------------
+Oliver belongs to the manager with id: 145
+Janette belongs to the manager with id: 146
+Patrick belongs to the manager with id: 146
+Allan belongs to the manager with id: 146
+Lindsey belongs to the manager with id: 146
+Louise belongs to the manager with id: 146
+Sarath belongs to the manager with id: 146
+Clara belongs to the manager with id: 147
+Danielle belongs to the manager with id: 147
+Mattea belongs to the manager with id: 147
+David belongs to the manager with id: 147
+
+Employe and Manager
+--------------------------------------------------------------------------------
+Sundar belongs to the manager with id: 147
+Amit belongs to the manager with id: 147
+Lisa belongs to the manager with id: 148
+Harrison belongs to the manager with id: 148
+Tayler belongs to the manager with id: 148
+William belongs to the manager with id: 148
+Elizabeth belongs to the manager with id: 148
+Sundita belongs to the manager with id: 148
+Ellen belongs to the manager with id: 149
+Alyssa belongs to the manager with id: 149
+Jonathon belongs to the manager with id: 149
+
+Employe and Manager
+--------------------------------------------------------------------------------
+Jack belongs to the manager with id: 149
+Kimberely belongs to the manager with id: 149
+Charles belongs to the manager with id: 149
+Winston belongs to the manager with id: 120
+Jean belongs to the manager with id: 120
+Martha belongs to the manager with id: 120
+Girard belongs to the manager with id: 120
+Nandita belongs to the manager with id: 121
+Alexis belongs to the manager with id: 121
+Julia belongs to the manager with id: 121
+Anthony belongs to the manager with id: 121
+
+Employe and Manager
+--------------------------------------------------------------------------------
+Kelly belongs to the manager with id: 122
+Jennifer belongs to the manager with id: 122
+Timothy belongs to the manager with id: 122
+Randall belongs to the manager with id: 122
+Sarah belongs to the manager with id: 123
+Britney belongs to the manager with id: 123
+Samuel belongs to the manager with id: 123
+Vance belongs to the manager with id: 123
+Alana belongs to the manager with id: 124
+Kevin belongs to the manager with id: 124
+Donald belongs to the manager with id: 124
+
+Employe and Manager
+--------------------------------------------------------------------------------
+Douglas belongs to the manager with id: 124
+Jennifer belongs to the manager with id: 101
+Michael belongs to the manager with id: 100
+Pat belongs to the manager with id: 201
+Susan belongs to the manager with id: 101
+Hermann belongs to the manager with id: 101
+Shelley belongs to the manager with id: 101
+William belongs to the manager with id: 205
+
+107 rows selected.
+
+SQL> select first_name||q'[ belongs to the manager with id: ]'|| manager_id as "Employe and Manager" from employees;

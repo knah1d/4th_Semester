@@ -1,0 +1,18 @@
+DECLARE 
+V_NUM_1 NUMBER:= 5;
+V_NUM_2 NUMBER:= 3;
+V_TEMP NUMBER;
+v_first_name varchar2(20);
+v_last_name varchar2(25);
+
+BEGIN
+ V_TEMP:=V_NUM_1;
+ V_NUM_1:=V_NUM_2;
+ V_NUM_2:=V_TEMP;
+ 
+ DBMS_OUTPUT.PUT_LINE('V_NUM_1 '|| 'V_NUM_2');
+ DBMS_OUTPUT.PUT_LINE(V_NUM_1 ||' '|| V_NUM_2);
+ 
+ 
+END;
+/
